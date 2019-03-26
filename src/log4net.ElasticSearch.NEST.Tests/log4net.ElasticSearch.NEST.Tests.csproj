@@ -8,8 +8,8 @@
     <ProjectGuid>{2F7D7AD4-2DA0-430A-9E90-9D0E398D590C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>log4net.ElasticSearch.Tests</RootNamespace>
-    <AssemblyName>log4net.ElasticSearch.Tests</AssemblyName>
+    <RootNamespace>log4net.ElasticSearch.NEST.Tests</RootNamespace>
+    <AssemblyName>log4net.ElasticSearch.NEST.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -36,9 +36,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Elasticsearch.Net, Version=2.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
-      <HintPath>..\packages\Elasticsearch.Net.2.3.3\lib\net45\Elasticsearch.Net.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Elasticsearch.Net, Version=6.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elasticsearch.Net.6.6.0\lib\net461\Elasticsearch.Net.dll</HintPath>
     </Reference>
     <Reference Include="Faker.NET4">
       <HintPath>..\packages\Faker.Net.1.0.3\lib\net40\Faker.NET4.dll</HintPath>
@@ -51,18 +50,15 @@
       <HintPath>..\packages\FluentAssertions.4.9.0\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Nest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
-      <HintPath>..\packages\NEST.2.3.3\lib\net45\Nest.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Nest, Version=6.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEST.6.6.0\lib\net461\Nest.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -97,9 +93,8 @@
     <Compile Include="Infrastructure\Builders\LogEventBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\Retry.cs" />
-    <Compile Include="UnitTests\Stubs\HttpClientStub.cs" />
+    <Compile Include="UnitTests\Stubs\NestClientStub.cs" />
     <Compile Include="UnitTests\RepositoryTests.cs" />
-    <Compile Include="UnitTests\SslTests.cs" />
     <Compile Include="UnitTests\Stubs\ErrorHandlerStub.cs" />
     <Compile Include="UnitTests\ExtensionMethods.cs" />
     <Compile Include="UnitTests\Stubs\RepositoryStub.cs" />
@@ -116,9 +111,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\log4net.ElasticSearch\log4net.ElasticSearch.csproj">
+    <ProjectReference Include="..\log4net.ElasticSearch.NEST\log4net.ElasticSearch.NEST.csproj">
       <Project>{22964cb0-8a39-41ea-807d-b5216d27df70}</Project>
-      <Name>log4net.ElasticSearch</Name>
+      <Name>log4net.ElasticSearch.NEST</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿namespace log4net.ElasticSearch.Tests.UnitTests
 {
-    public class TestableAppender : ElasticSearchAppender
+    public class TestableAppender : ElasticSearchNestAppender
     {
         readonly IRepository repository;
 

@@ -8,7 +8,7 @@ namespace log4net.ElasticSearch.Tests.UnitTests
         const string ConnectionString = "Server=localhost;Index=log_test;Port=9200;rolling=true";
         const int BufferSize = 100;
 
-        public ElasticSearchAppender Appender { get; private set; }
+        public ElasticSearchNestAppender Appender { get; private set; }
 
         public RepositoryStub Repository { get; private set; }
 

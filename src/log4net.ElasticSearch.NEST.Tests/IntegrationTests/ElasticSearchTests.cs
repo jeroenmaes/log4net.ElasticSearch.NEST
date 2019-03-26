@@ -23,7 +23,7 @@ namespace log4net.ElasticSearch.Tests.IntegrationTests
         [Fact]
         public void Can_insert_record()
         {
-            var indexResponse = elasticClient.Index(LogEventBuilder.Default.LogEvent);
+            var indexResponse = elasticClient.IndexDocument(LogEventBuilder.Default.LogEvent);
 
             indexResponse.Id.Should().NotBeNull();
         }
@@ -33,7 +33,7 @@ namespace log4net.ElasticSearch.Tests.IntegrationTests
         {
             var logEvent = LogEventBuilder.Default.LogEvent;
 
-            elasticClient.Index(logEvent);    
+            elasticClient.IndexDocument(logEvent);    
 
             Retry.Ignoring<XunitException>(() =>
                 {

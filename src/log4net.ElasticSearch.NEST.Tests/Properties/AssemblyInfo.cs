@@ -2,11 +2,11 @@
 using System.Runtime.InteropServices;
 using log4net.Config;
 
-[assembly: AssemblyTitle("log4net.ElasticSearch.Tests")]
+[assembly: AssemblyTitle("log4net.ElasticSearch.NEST.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("log4net.ElasticSearch.Tests")]
+[assembly: AssemblyProduct("log4net.ElasticSearch.NEST.Tests")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

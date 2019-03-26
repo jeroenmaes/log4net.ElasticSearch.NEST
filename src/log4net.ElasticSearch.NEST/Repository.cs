@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using log4net.ElasticSearch.Infrastructure;
 using log4net.ElasticSearch.Models;
+using Uri = System.Uri;
 
 namespace log4net.ElasticSearch
 {
@@ -11,13 +12,13 @@ namespace log4net.ElasticSearch
 
     public class Repository : IRepository
     {
-        readonly Uri uri;
-        readonly IHttpClient httpClient;
+        readonly List<Uri> uri;
+        readonly INestClient client;
 
-        Repository(Uri uri, IHttpClient httpClient)
+        Repository(List<Uri> uri, INestClient client)
         {
             this.uri = uri;
-            this.httpClient = httpClient;
+            this.client = client;
         }
 
         /// <summary>
@@ -34,28 +35,38 @@ namespace log4net.ElasticSearch
                 if (bufferSize <= 1)
                 {
                     // Post the logEvents one at a time throught the ES insert API
-                    logEvents.Do(logEvent => httpClient.Post(uri, logEvent));
+                    logEvents.Do(logEvent => client.Post(uri, logEvent));
                 }
                 else
                 {
                     // Post the logEvents all at once using the ES _bulk API
-                    httpClient.PostBulk(uri, logEvents);
+                    client.PostBulk(uri, logEvents);
                 }   
             }
             catch(System.Exception ex)
             {
-                //DO NOTHING.
+                throw ex;
             }
         }
 
         public static IRepository Create(string connectionString)
         {
-            return Create(connectionString, new HttpClient());
+            return Create(connectionString, new NestClient());
         }
 
-        public static IRepository Create(string connectionString, IHttpClient httpClient)
+        public static IRepository Create(string connectionString, INestClient client)
         {
-            return new Repository(Uri.For(connectionString), httpClient);
+            var nodeArray = connectionString.Split(',');
+            var uris = new List<Uri>();
+            foreach (var nodeName in nodeArray)
+            {
+                if (!string.IsNullOrEmpty(nodeName))
+                {
+                    uris.Add(new Uri(nodeName));
+                }
+            }
+
+            return new Repository(uris, client);
         }
     }
 }

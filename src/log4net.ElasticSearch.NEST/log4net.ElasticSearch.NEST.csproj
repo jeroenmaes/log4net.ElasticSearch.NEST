@@ -7,8 +7,8 @@
     <ProjectGuid>{22964CB0-8A39-41EA-807D-B5216D27DF70}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>log4net.ElasticSearch</RootNamespace>
-    <AssemblyName>log4net.ElasticSearch</AssemblyName>
+    <RootNamespace>log4net.ElasticSearch.NEST</RootNamespace>
+    <AssemblyName>log4net.ElasticSearch.NEST</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -34,9 +34,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Elasticsearch.Net, Version=6.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elasticsearch.Net.6.6.0\lib\net461\Elasticsearch.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Nest, Version=6.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEST.6.6.0\lib\net461\Nest.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,9 +53,9 @@
     <Compile Include="Infrastructure\AnonymousDisposable.cs" />
     <Compile Include="AssemblyVersionInfo.cs" />
     <Compile Include="Infrastructure\Clock.cs" />
-    <Compile Include="ElasticSearchAppender.cs" />
+    <Compile Include="ElasticSearchNestAppender.cs" />
     <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="Infrastructure\HttpClient.cs" />
+    <Compile Include="Infrastructure\NestClient.cs" />
     <Compile Include="Infrastructure\Pair.cs" />
     <Compile Include="Models\JsonSerializableException.cs" />
     <Compile Include="Repository.cs" />

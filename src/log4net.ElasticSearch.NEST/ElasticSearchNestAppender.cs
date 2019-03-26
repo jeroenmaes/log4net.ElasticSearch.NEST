@@ -8,9 +8,9 @@ using log4net.ElasticSearch.Models;
 
 namespace log4net.ElasticSearch
 {
-    public class ElasticSearchAppender : BufferingAppenderSkeleton
+    public class ElasticSearchNestAppender : BufferingAppenderSkeleton
     {
-        static readonly string AppenderType = typeof (ElasticSearchAppender).Name;
+        static readonly string AppenderType = typeof (ElasticSearchNestAppender).Name;
 
         const int DefaultOnCloseTimeout = 30000;
         readonly ManualResetEvent workQueueEmptyEvent;
@@ -18,13 +18,14 @@ namespace log4net.ElasticSearch
         int queuedCallbackCount;
         IRepository repository;
 
-        public ElasticSearchAppender()
+        public ElasticSearchNestAppender()
         {
             workQueueEmptyEvent = new ManualResetEvent(true);
             OnCloseTimeout = DefaultOnCloseTimeout;
         }
 
         public string ConnectionString { get; set; }
+        public string ConnectionStringList { get; set; }
         public int OnCloseTimeout { get; set; }
 
         public override void ActivateOptions()
@@ -35,7 +36,7 @@ namespace log4net.ElasticSearch
 
             try
             {
-                Validate(ConnectionString);
+                //Validate(ConnectionString);
             }
             catch (Exception ex)
             {
@@ -45,8 +46,9 @@ namespace log4net.ElasticSearch
 
             // Artificially add the buffer size to the connection string so it can be parsed
             // later to decide if we should send a _bulk API call
-            ConnectionString += string.Format(";BufferSize={0}", BufferSize);
-            repository = CreateRepository(ConnectionString);            
+            //ConnectionString += string.Format(";BufferSize={0}", BufferSize);
+
+            repository = CreateRepository(ConnectionStringList);            
         }
 
         protected override void SendBuffer(LoggingEvent[] events)

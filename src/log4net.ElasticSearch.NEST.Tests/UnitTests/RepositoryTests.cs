@@ -20,15 +20,15 @@ namespace log4net.ElasticSearch.Tests.UnitTests
 
             using (Clock.Freeze(new DateTime(2015, 01, 01, 23, 59, 58)))
             {
-                var httpClientStub = new HttpClientStub(() => Clock.Freeze(Clock.Now.AddSeconds(1)));
+                var clientStub = new NestClientStub(() => Clock.Freeze(Clock.Now.AddSeconds(1)));
 
-                var repository = Repository.Create("Server=localhost;Index=log;Port=9200;rolling=true", httpClientStub);
+                var repository = Repository.Create("Server=localhost;Index=log;Port=9200;rolling=true", clientStub);
 
                 repository.Add(logEvents, 0);
 
-                httpClientStub.Items.Count().Should().Be(2);
-                httpClientStub.Items.First().Value.Count.Should().Be(2);
-                httpClientStub.Items.Second().Value.Count.Should().Be(2);
+                clientStub.Items.Count().Should().Be(2);
+                clientStub.Items.First().Value.Count.Should().Be(2);
+                clientStub.Items.Second().Value.Count.Should().Be(2);
             }
         }
     }
