@@ -59,7 +59,6 @@
     <Compile Include="Infrastructure\Pair.cs" />
     <Compile Include="Models\JsonSerializableException.cs" />
     <Compile Include="Repository.cs" />
-    <Compile Include="Models\Uri.cs" />
     <Compile Include="Models\logEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

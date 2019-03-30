@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using log4net.ElasticSearch.Infrastructure;
 using log4net.ElasticSearch.Models;
+using Nest;
 using Uri = System.Uri;
 
 namespace log4net.ElasticSearch
@@ -14,11 +15,13 @@ namespace log4net.ElasticSearch
     {
         readonly List<Uri> uri;
         readonly INestClient client;
+        readonly string indexName;
 
-        Repository(List<Uri> uri, INestClient client)
+        Repository(List<Uri> uri, string indexName, INestClient client)
         {
             this.uri = uri;
             this.client = client;
+            this.indexName = indexName;
         }
 
         /// <summary>
@@ -35,12 +38,12 @@ namespace log4net.ElasticSearch
                 if (bufferSize <= 1)
                 {
                     // Post the logEvents one at a time throught the ES insert API
-                    logEvents.Do(logEvent => client.Post(uri, logEvent));
+                    logEvents.Do(logEvent => client.Post(uri, indexName, logEvent));
                 }
                 else
                 {
                     // Post the logEvents all at once using the ES _bulk API
-                    client.PostBulk(uri, logEvents);
+                    client.PostBulk(uri, indexName, logEvents);
                 }   
             }
             catch(System.Exception ex)
@@ -49,12 +52,12 @@ namespace log4net.ElasticSearch
             }
         }
 
-        public static IRepository Create(string connectionString)
+        public static IRepository Create(string connectionString, string indexName)
         {
-            return Create(connectionString, new NestClient());
+            return Create(connectionString, indexName, new NestClient());
         }
 
-        public static IRepository Create(string connectionString, INestClient client)
+        public static IRepository Create(string connectionString, string indexName, INestClient client)
         {
             var nodeArray = connectionString.Split(',');
             var uris = new List<Uri>();
@@ -66,7 +69,7 @@ namespace log4net.ElasticSearch
                 }
             }
 
-            return new Repository(uris, client);
+            return new Repository(uris, indexName, client);
         }
     }
 }

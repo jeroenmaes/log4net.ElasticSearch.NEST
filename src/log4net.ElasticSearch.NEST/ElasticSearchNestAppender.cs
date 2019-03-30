@@ -23,9 +23,11 @@ namespace log4net.ElasticSearch
             workQueueEmptyEvent = new ManualResetEvent(true);
             OnCloseTimeout = DefaultOnCloseTimeout;
         }
+        
+        public string ServerList { get; set; }
+        public string IndexName { get; set; }
+       
 
-        public string ConnectionString { get; set; }
-        public string ConnectionStringList { get; set; }
         public int OnCloseTimeout { get; set; }
 
         public override void ActivateOptions()
@@ -36,19 +38,15 @@ namespace log4net.ElasticSearch
 
             try
             {
-                //Validate(ConnectionString);
+                Validate(ServerList);
             }
             catch (Exception ex)
             {
-                HandleError("Failed to validate ConnectionString in ActivateOptions", ex);
+                HandleError("Failed to validate ServerList in ActivateOptions", ex);
                 return;
             }
-
-            // Artificially add the buffer size to the connection string so it can be parsed
-            // later to decide if we should send a _bulk API call
-            //ConnectionString += string.Format(";BufferSize={0}", BufferSize);
-
-            repository = CreateRepository(ConnectionStringList);            
+            
+            repository = CreateRepository(ServerList, IndexName);            
         }
 
         protected override void SendBuffer(LoggingEvent[] events)
@@ -67,9 +65,9 @@ namespace log4net.ElasticSearch
             HandleError("Failed to send all queued events in OnClose");
         }
 
-        protected virtual IRepository CreateRepository(string connectionString)
+        protected virtual IRepository CreateRepository(string connectionString, string indexName)
         {
-            return Repository.Create(connectionString);
+            return Repository.Create(connectionString, indexName);
         }
 
         protected virtual bool TryAsyncSend(IEnumerable<LoggingEvent> events)
@@ -121,16 +119,16 @@ namespace log4net.ElasticSearch
             ErrorHandler.Error("{0} [{1}]: {2}.".With(AppenderType, Name, message), ex, ErrorCode.GenericFailure);
         }
 
-        static void Validate(string connectionString)
+        static void Validate(string serverList)
         {
-            if (connectionString == null)
+            if (serverList == null)
             {
-                throw new ArgumentNullException("connectionString");
+                throw new ArgumentNullException("serverList");
             }
 
-            if (connectionString.Length == 0)
+            if (serverList.Length == 0)
             {
-                throw new ArgumentException("connectionString is empty", "connectionString");
+                throw new ArgumentException("serverList is empty", "serverList");
             }
         }
     }    

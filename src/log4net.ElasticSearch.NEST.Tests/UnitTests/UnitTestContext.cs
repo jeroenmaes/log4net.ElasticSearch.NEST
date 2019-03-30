@@ -5,7 +5,7 @@ namespace log4net.ElasticSearch.Tests.UnitTests
 {
     public class UnitTestContext : IDisposable
     {
-        const string ConnectionString = "Server=localhost;Index=log_test;Port=9200;rolling=true";
+        const string ServerList = "Server=localhost;Index=log_test;Port=9200;rolling=true";
         const int BufferSize = 100;
 
         public ElasticSearchNestAppender Appender { get; private set; }
@@ -34,7 +34,7 @@ namespace log4net.ElasticSearch.Tests.UnitTests
                 {
                     Lossy = false,
                     BufferSize = bufferSize, 
-                    ConnectionString = ConnectionString, 
+                    ServerList = ServerList, 
                     ErrorHandler = errorHandler, 
                     FailSend = failSend, 
                     FailClose = failClose

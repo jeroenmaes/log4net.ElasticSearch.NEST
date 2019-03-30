@@ -22,7 +22,7 @@ namespace log4net.ElasticSearch.Tests.UnitTests
             {
                 var clientStub = new NestClientStub(() => Clock.Freeze(Clock.Now.AddSeconds(1)));
 
-                var repository = Repository.Create("Server=localhost;Index=log;Port=9200;rolling=true", clientStub);
+                var repository = Repository.Create("Server=localhost;Index=log;Port=9200;rolling=true", "IndexName", clientStub);
 
                 repository.Add(logEvents, 0);
 

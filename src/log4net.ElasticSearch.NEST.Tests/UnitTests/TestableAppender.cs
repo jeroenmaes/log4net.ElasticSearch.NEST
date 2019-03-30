@@ -13,7 +13,7 @@
 
         public bool? FailClose { get; set; }
 
-        protected override IRepository CreateRepository(string connectionString)
+        protected override IRepository CreateRepository(string connectionString, string indexName)
         {
             return repository;
         }

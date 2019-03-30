@@ -11,8 +11,8 @@ namespace log4net.ElasticSearch.Infrastructure
 {
     public interface INestClient
     {
-        void Post(List<Uri> uris, logEvent item);
-        void PostBulk(List<Uri> uris, IEnumerable<logEvent> items);
+        void Post(List<Uri> uris, string indexName, logEvent item);
+        void PostBulk(List<Uri> uris, string indexName, IEnumerable<logEvent> items);
     }
 
     public class NestClient : INestClient
@@ -20,18 +20,18 @@ namespace log4net.ElasticSearch.Infrastructure
 
         private static Nest.ElasticClient _elasticClient;
 
-        private void CreateElasticClient(List<Uri> uris)
+        private void CreateElasticClient(List<Uri> uris, string indexName)
         {
             var connectionPool = new SniffingConnectionPool(uris);
-            var connectionSettings = new Nest.ConnectionSettings(connectionPool).DefaultIndex($"LOG4TEST".ToLower());
+            var connectionSettings = new Nest.ConnectionSettings(connectionPool).DefaultIndex(indexName.ToLower());
             _elasticClient = new Nest.ElasticClient(connectionSettings);
         }
 
-        public void Post(List<Uri> uris, logEvent item)
+        public void Post(List<Uri> uris, string indexName, logEvent item)
         {
             if (_elasticClient == null)
             {
-                CreateElasticClient(uris);
+                CreateElasticClient(uris, indexName);
             }
 
             var elasticResponse = _elasticClient.IndexDocument(item);
@@ -41,11 +41,17 @@ namespace log4net.ElasticSearch.Infrastructure
             }
         }
 
-        public void PostBulk(List<Uri> uris, IEnumerable<logEvent> items)
+        public void PostBulk(List<Uri> uris, string indexName, IEnumerable<logEvent> items)
         {
-            foreach (var item in items)
+            if (_elasticClient == null)
             {
-                Post(uris, item);
+                CreateElasticClient(uris, indexName);
+            }
+            
+            var elasticResponse = _elasticClient.Bulk(b => b.IndexMany(items, (d, doc) => d.Document(doc)));
+            if (!elasticResponse.IsValid)
+            {
+                throw new Exception($"Logging in Bulk to ElasticSearch failed. Response: {elasticResponse}");
             }
         }
     }

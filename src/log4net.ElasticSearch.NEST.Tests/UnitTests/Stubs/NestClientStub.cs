@@ -18,7 +18,7 @@ namespace log4net.ElasticSearch.Tests.UnitTests.Stubs
             items = new Dictionary<Uri, IList<object>>();
         }
 
-        public void Post(List<Uri> uris, logEvent item)
+        public void Post(List<Uri> uris, string indexName, logEvent item)
         {
             //if (!items.ContainsKey(uri))
             //{
@@ -29,7 +29,7 @@ namespace log4net.ElasticSearch.Tests.UnitTests.Stubs
             action();
         }
 
-        public void PostBulk(List<Uri> uris, IEnumerable<logEvent> items)
+        public void PostBulk(List<Uri> uris, string indexName, IEnumerable<logEvent> items)
         {
 
         }
