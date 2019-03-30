@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data.Common;
 using System.Linq;
-using System.Web.Script.Serialization;
 using log4net.Core;
 using log4net.ElasticSearch.NEST.Infrastructure;
 using log4net.Util;
@@ -28,13 +27,6 @@ namespace log4net.ElasticSearch.NEST
         public static IEnumerable<KeyValuePair<string, string>> Properties(this LoggingEvent self)
         {
             return self.GetProperties().AsPairs();
-        }
-
-        public static string ToJson<T>(this T self)
-        {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            serializer.MaxJsonLength = Int32.MaxValue;
-            return serializer.Serialize(self);
         }
 
         public static bool Contains(this StringDictionary self, string key)
