@@ -51,7 +51,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\AnonymousDisposable.cs" />
-    <Compile Include="AssemblyVersionInfo.cs" />
     <Compile Include="Infrastructure\Clock.cs" />
     <Compile Include="ElasticSearchNestAppender.cs" />
     <Compile Include="ExtensionMethods.cs" />

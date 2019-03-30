@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using log4net.ElasticSearch.NEST.Models;
 
-namespace log4net.ElasticSearch.Tests.Infrastructure.Builders
+namespace log4net.ElasticSearch.NEST.Tests.Infrastructure.Builders
 {
     public class LogEventBuilder
     {
@@ -25,7 +26,7 @@ namespace log4net.ElasticSearch.Tests.Infrastructure.Builders
             get { return new LogEventBuilder().WithDefaults(); }
         }
 
-        public Models.logEvent LogEvent
+        public logEvent LogEvent
         {
             get { return this; }
         }
@@ -47,9 +48,9 @@ namespace log4net.ElasticSearch.Tests.Infrastructure.Builders
             return this;
         }
 
-        public static implicit operator Models.logEvent(LogEventBuilder builder)
+        public static implicit operator logEvent(LogEventBuilder builder)
         {
-            return new Models.logEvent
+            return new logEvent
                 {
                     className = builder.className,
                     domain = builder.domain,

@@ -5,10 +5,10 @@ using System.Data.Common;
 using System.Linq;
 using System.Web.Script.Serialization;
 using log4net.Core;
-using log4net.ElasticSearch.Infrastructure;
+using log4net.ElasticSearch.NEST.Infrastructure;
 using log4net.Util;
 
-namespace log4net.ElasticSearch
+namespace log4net.ElasticSearch.NEST
 {
     public static class ExtensionMethods
     {

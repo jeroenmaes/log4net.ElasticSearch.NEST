@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using log4net.Core;
-using log4net.ElasticSearch.Infrastructure;
+using log4net.ElasticSearch.NEST.Infrastructure;
 
-namespace log4net.ElasticSearch.Models
+namespace log4net.ElasticSearch.NEST.Models
 {
     /// <summary>
     /// Primary object which will get serialized into a json object to pass to ES. Deviating from CamelCase

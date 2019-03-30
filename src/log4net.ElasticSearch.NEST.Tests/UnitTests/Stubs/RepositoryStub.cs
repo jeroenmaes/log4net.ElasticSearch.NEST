@@ -2,11 +2,10 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading;
-using log4net.ElasticSearch.Models;
+using log4net.ElasticSearch.NEST.Models;
 
-namespace log4net.ElasticSearch.Tests.UnitTests.Stubs
+namespace log4net.ElasticSearch.NEST.Tests.UnitTests.Stubs
 {
     public class RepositoryStub : IRepository
     {

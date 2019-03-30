@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using FluentAssertions;
+using log4net.ElasticSearch.NEST.Infrastructure;
+using log4net.ElasticSearch.NEST.Models;
+using log4net.ElasticSearch.NEST.Tests.UnitTests.Stubs;
 using Xunit;
-using log4net.ElasticSearch.Infrastructure;
-using log4net.ElasticSearch.Models;
-using log4net.ElasticSearch.Tests.UnitTests.Stubs;
 
-namespace log4net.ElasticSearch.Tests.UnitTests
+namespace log4net.ElasticSearch.NEST.Tests.UnitTests
 {
     public class RepositoryTests
     {
@@ -22,7 +22,7 @@ namespace log4net.ElasticSearch.Tests.UnitTests
             {
                 var clientStub = new NestClientStub(() => Clock.Freeze(Clock.Now.AddSeconds(1)));
 
-                var repository = Repository.Create("Server=localhost;Index=log;Port=9200;rolling=true", "IndexName", clientStub);
+                var repository = NEST.Repository.Create("Server=localhost;Index=log;Port=9200;rolling=true", "IndexName", clientStub);
 
                 repository.Add(logEvents, 0);
 

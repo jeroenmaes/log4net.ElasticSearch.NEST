@@ -2,7 +2,7 @@
 using Nest;
 using Xunit;
 
-namespace log4net.ElasticSearch.Tests.IntegrationTests
+namespace log4net.ElasticSearch.NEST.Tests.IntegrationTests
 {
     public class IntegrationTestFixture : IDisposable
     {

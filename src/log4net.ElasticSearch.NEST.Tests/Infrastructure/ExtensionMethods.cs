@@ -1,4 +1,4 @@
-﻿namespace log4net.ElasticSearch.Tests.Infrastructure
+﻿namespace log4net.ElasticSearch.NEST.Tests.Infrastructure
 {
     public static class ExtensionMethods
     {

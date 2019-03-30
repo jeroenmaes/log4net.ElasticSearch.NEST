@@ -1,8 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Configuration;
-using log4net.ElasticSearch.Tests.Infrastructure;
 
-namespace log4net.ElasticSearch.Tests.IntegrationTests
+namespace log4net.ElasticSearch.NEST.Tests.IntegrationTests
 {
     public static class AppSettings
     {
@@ -10,7 +9,7 @@ namespace log4net.ElasticSearch.Tests.IntegrationTests
 
         public static bool UseFiddler(this NameValueCollection self)
         {
-            return self.GetOrDefault("UseFiddler", "false").ToBool();
+            return ExtensionMethods.ToBool(self.GetOrDefault("UseFiddler", "false"));
         }
 
         private static string GetOrDefault(this NameValueCollection self, string key, string @default)

@@ -4,9 +4,9 @@ using System.Net;
 using System.Threading;
 using log4net.Appender;
 using log4net.Core;
-using log4net.ElasticSearch.Models;
+using log4net.ElasticSearch.NEST.Models;
 
-namespace log4net.ElasticSearch
+namespace log4net.ElasticSearch.NEST
 {
     public class ElasticSearchNestAppender : BufferingAppenderSkeleton
     {

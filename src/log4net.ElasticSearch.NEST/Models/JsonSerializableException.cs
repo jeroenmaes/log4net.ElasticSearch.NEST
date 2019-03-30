@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Collections;
 
-namespace log4net.ElasticSearch.Models
+namespace log4net.ElasticSearch.NEST.Models
 {
     public class JsonSerializableException
     {

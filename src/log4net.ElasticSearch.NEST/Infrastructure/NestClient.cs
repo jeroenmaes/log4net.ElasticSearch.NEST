@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Text;
 using Elasticsearch.Net;
-using log4net.ElasticSearch.Models;
+using log4net.ElasticSearch.NEST.Models;
 using Uri = System.Uri;
 
-namespace log4net.ElasticSearch.Infrastructure
+namespace log4net.ElasticSearch.NEST.Infrastructure
 {
     public interface INestClient
     {

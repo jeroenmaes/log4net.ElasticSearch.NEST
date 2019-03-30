@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace log4net.ElasticSearch.Infrastructure
+namespace log4net.ElasticSearch.NEST.Infrastructure
 {
     public static class Clock
     {

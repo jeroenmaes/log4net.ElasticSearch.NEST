@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
+using log4net.ElasticSearch.NEST.Models;
+using log4net.ElasticSearch.NEST.Tests.Infrastructure;
+using log4net.ElasticSearch.NEST.Tests.Infrastructure.Builders;
 using Nest;
 using Xunit;
 using Xunit.Sdk;
-using log4net.ElasticSearch.Models;
-using log4net.ElasticSearch.Tests.Infrastructure;
-using log4net.ElasticSearch.Tests.Infrastructure.Builders;
 
-namespace log4net.ElasticSearch.Tests.IntegrationTests
+namespace log4net.ElasticSearch.NEST.Tests.IntegrationTests
 {
     [Collection("IndexCollection")]
     public class ElasticSearchTests

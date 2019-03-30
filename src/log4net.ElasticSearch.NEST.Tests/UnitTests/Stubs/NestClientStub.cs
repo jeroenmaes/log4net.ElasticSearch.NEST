@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using log4net.ElasticSearch.Infrastructure;
-using log4net.ElasticSearch.Models;
+using log4net.ElasticSearch.NEST.Infrastructure;
+using log4net.ElasticSearch.NEST.Models;
 using Uri = System.Uri;
 
-namespace log4net.ElasticSearch.Tests.UnitTests.Stubs
+namespace log4net.ElasticSearch.NEST.Tests.UnitTests.Stubs
 {
     public class NestClientStub : INestClient
     {

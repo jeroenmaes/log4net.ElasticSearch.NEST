@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using log4net.ElasticSearch.Infrastructure;
-using log4net.ElasticSearch.Models;
-using Nest;
+using log4net.ElasticSearch.NEST.Infrastructure;
+using log4net.ElasticSearch.NEST.Models;
 using Uri = System.Uri;
 
-namespace log4net.ElasticSearch
+namespace log4net.ElasticSearch.NEST
 {
     public interface IRepository
     {

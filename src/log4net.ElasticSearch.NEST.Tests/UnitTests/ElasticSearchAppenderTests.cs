@@ -3,12 +3,12 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Threading;
 using FluentAssertions;
+using log4net.ElasticSearch.NEST.Tests.Infrastructure;
+using log4net.ElasticSearch.NEST.Tests.Infrastructure.Builders;
 using Xunit;
 using Xunit.Sdk;
-using log4net.ElasticSearch.Tests.Infrastructure;
-using log4net.ElasticSearch.Tests.Infrastructure.Builders;
 
-namespace log4net.ElasticSearch.Tests.UnitTests
+namespace log4net.ElasticSearch.NEST.Tests.UnitTests
 {
     public class ElasticSearchAppenderTests
     {
