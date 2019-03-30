@@ -4,7 +4,7 @@
     <AssemblyTitle>log4net.ElasticSearch.NEST</AssemblyTitle>
     <Product>log4net.ElasticSearch.NEST</Product>
     <Copyright>Copyright ©  2019</Copyright>
-    <OutputPath>..\..\bin\lib\net45\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/jeroenmaes/log4net.ElasticSearch.NEST/blob/master/LICENSE</PackageLicenseUrl>
     <Description>log4net.ElasticSearch.NEST is a log4net appender, based on the log4net.ElasticSearch package, for easy logging of exceptions and messages to ElasticSearch indices using the NEST package.</Description>
