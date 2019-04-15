@@ -20,7 +20,14 @@ namespace log4net.ElasticSearch.NEST.Infrastructure
         private void CreateElasticClient(List<Uri> uris, string indexName)
         {
             var connectionPool = new SniffingConnectionPool(uris);
-            var connectionSettings = new Nest.ConnectionSettings(connectionPool).DefaultIndex(indexName.ToLower());
+            
+            var connectionSettings = new Nest.ConnectionSettings(connectionPool)
+                .SniffOnStartup()
+                .SniffOnConnectionFault()
+                .DisableAutomaticProxyDetection()
+                .ThrowExceptions()
+                .DefaultIndex(indexName.ToLower());
+
             _elasticClient = new Nest.ElasticClient(connectionSettings);
         }
 

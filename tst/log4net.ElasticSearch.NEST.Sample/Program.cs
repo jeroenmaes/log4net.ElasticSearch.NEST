@@ -16,6 +16,11 @@ namespace log4net.ElasticSearch.NEST.Sample
             logger.Info("Info.");
             logger.Fatal("Fatal!", new ArgumentException("42"));
 
+            for (int i = 0; i < 3000; i++)
+            {
+                logger.Info($"Trace {i}");
+            }
+
             Console.ReadKey();
         }
     }
