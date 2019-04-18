@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <AssemblyTitle>log4net.ElasticSearch.NEST</AssemblyTitle>
     <Product>log4net.ElasticSearch.NEST</Product>
     <Copyright>Copyright ©  2019</Copyright>
@@ -10,9 +10,9 @@
     <Description>log4net.ElasticSearch.NEST is a log4net appender, based on the log4net.ElasticSearch package, for easy logging of exceptions and messages to ElasticSearch indices using the NEST package.</Description>
     <PackageTags>log4net;ElasticSearch;appender;NEST</PackageTags>
     <RepositoryUrl>https://github.com/jeroenmaes/log4net.ElasticSearch.NEST</RepositoryUrl>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
-    <Version>1.0.1</Version>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
+    <Version>1.0.3</Version>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineConstants>TRACE;DEBUG;NET45</DefineConstants>
