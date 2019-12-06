@@ -11,7 +11,9 @@ log4net.ElasticSearch.NEST is a log4net appender, based on the log4net.ElasticSe
       </layout>
       <ServerList value="http://localhost:9200/,http://localhost:9200/,http://localhost:9200/"/>
       <IndexName value="DEMO"/>
-      <lossy value="false" />
+      <IndexName value="DEMO"/>
+      <Rolling value ="true" />
+      
       <evaluator type="log4net.Core.LevelEvaluator">
         <threshold value="ALL" />
       </evaluator>
