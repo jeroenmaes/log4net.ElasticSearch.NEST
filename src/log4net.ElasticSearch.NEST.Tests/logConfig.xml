@@ -16,8 +16,7 @@
       <IndexName value="DEMO"/>
       <Rolling value="true" />
 
-      <lossy value="false" />
-        <evaluator type="log4net.Core.LevelEvaluator">
+      <evaluator type="log4net.Core.LevelEvaluator">
             <threshold value="ALL" />
         </evaluator>
       <bufferSize value="100" />
