@@ -26,8 +26,8 @@ namespace log4net.ElasticSearch.NEST
         
         public string ServerList { get; set; }
         public string IndexName { get; set; }
-       
-
+        public bool Rolling { get; set; } = false;
+        public string RollingIndexNameDateFormat { get; set; } = "yyyy.MM.dd";
         public int OnCloseTimeout { get; set; }
 
         public override void ActivateOptions()
@@ -46,7 +46,7 @@ namespace log4net.ElasticSearch.NEST
                 return;
             }
             
-            repository = CreateRepository(ServerList, IndexName);            
+            repository = CreateRepository(ServerList, IndexName, Rolling, RollingIndexNameDateFormat);            
         }
 
         protected override void SendBuffer(LoggingEvent[] events)
@@ -65,9 +65,9 @@ namespace log4net.ElasticSearch.NEST
             HandleError("Failed to send all queued events in OnClose");
         }
 
-        protected virtual IRepository CreateRepository(string connectionString, string indexName)
+        protected virtual IRepository CreateRepository(string connectionString, string indexName, bool rolling, string rollingFormat)
         {
-            return Repository.Create(connectionString, indexName);
+            return Repository.Create(connectionString, indexName, rolling, rollingFormat);
         }
 
         protected virtual bool TryAsyncSend(IEnumerable<LoggingEvent> events)

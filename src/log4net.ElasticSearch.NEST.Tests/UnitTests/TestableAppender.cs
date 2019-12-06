@@ -13,7 +13,7 @@
 
         public bool? FailClose { get; set; }
 
-        protected override IRepository CreateRepository(string connectionString, string indexName)
+        protected override IRepository CreateRepository(string connectionString, string indexName, bool rolling, string rollingFormat)
         {
             return repository;
         }

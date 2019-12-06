@@ -12,15 +12,19 @@ namespace log4net.ElasticSearch.NEST
 
     public class Repository : IRepository
     {
-        readonly List<Uri> uri;
-        readonly INestClient client;
-        readonly string indexName;
+        private readonly List<Uri> _uri;
+        private readonly INestClient _client;
+        private readonly string _rollingFormat;
+        private readonly bool _rolling;
+        private readonly string _indexName;
 
-        Repository(List<Uri> uri, string indexName, INestClient client)
+        public Repository(List<Uri> uri, string indexName, INestClient client, bool rolling, string rollingFormat)
         {
-            this.uri = uri;
-            this.client = client;
-            this.indexName = indexName;
+            this._uri = uri;
+            this._client = client;
+            this._indexName = indexName;
+            this._rolling = rolling;
+            this._rollingFormat = rollingFormat;
         }
 
         /// <summary>
@@ -34,15 +38,21 @@ namespace log4net.ElasticSearch.NEST
         {
             try
             {
+                var indexName = _indexName.ToLower();
+                if (_rolling)
+                {
+                    indexName = "{0}-{1}".With(indexName, Clock.Date.ToString(_rollingFormat));
+                }
+
                 if (bufferSize <= 1)
                 {
                     // Post the logEvents one at a time throught the ES insert API
-                    logEvents.Do(logEvent => client.Post(uri, indexName, logEvent));
+                    logEvents.Do(logEvent => _client.Post(_uri, indexName, logEvent));
                 }
                 else
                 {
                     // Post the logEvents all at once using the ES _bulk API
-                    client.PostBulk(uri, indexName, logEvents);
+                    _client.PostBulk(_uri, indexName, logEvents);
                 }   
             }
             catch(System.Exception ex)
@@ -51,12 +61,12 @@ namespace log4net.ElasticSearch.NEST
             }
         }
 
-        public static IRepository Create(string connectionString, string indexName)
+        public static IRepository Create(string connectionString, string indexName, bool rolling, string rollingFormat)
         {
-            return Create(connectionString, indexName, new NestClient());
+            return Create(connectionString, indexName, new NestClient(), rolling, rollingFormat);
         }
 
-        public static IRepository Create(string connectionString, string indexName, INestClient client)
+        public static IRepository Create(string connectionString, string indexName, INestClient client, bool rolling, string rollingFormat)
         {
             var nodeArray = connectionString.Split(',');
             var uris = new List<Uri>();
@@ -68,7 +78,7 @@ namespace log4net.ElasticSearch.NEST
                 }
             }
 
-            return new Repository(uris, indexName, client);
+            return new Repository(uris, indexName, client, rolling, rollingFormat);
         }
     }
 }

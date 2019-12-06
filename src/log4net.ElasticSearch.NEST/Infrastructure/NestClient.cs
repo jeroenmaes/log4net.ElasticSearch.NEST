@@ -17,7 +17,7 @@ namespace log4net.ElasticSearch.NEST.Infrastructure
 
         private static Nest.ElasticClient _elasticClient;
 
-        private void CreateElasticClient(List<Uri> uris, string indexName)
+        private void CreateElasticClient(List<Uri> uris)
         {
             var connectionPool = new SniffingConnectionPool(uris);
             
@@ -25,8 +25,7 @@ namespace log4net.ElasticSearch.NEST.Infrastructure
                 .SniffOnStartup()
                 .SniffOnConnectionFault()
                 .DisableAutomaticProxyDetection()
-                .ThrowExceptions()
-                .DefaultIndex(indexName.ToLower());
+                .ThrowExceptions();
 
             _elasticClient = new Nest.ElasticClient(connectionSettings);
         }
@@ -35,10 +34,11 @@ namespace log4net.ElasticSearch.NEST.Infrastructure
         {
             if (_elasticClient == null)
             {
-                CreateElasticClient(uris, indexName);
+                CreateElasticClient(uris);
             }
 
-            var elasticResponse = _elasticClient.IndexDocument(item);
+            var elasticResponse = _elasticClient.Index(item, i => i.Index(indexName));
+
             if (!elasticResponse.IsValid)
             {
                 throw new Exception($"Logging to ElasticSearch failed. Response: {elasticResponse}");
@@ -49,10 +49,11 @@ namespace log4net.ElasticSearch.NEST.Infrastructure
         {
             if (_elasticClient == null)
             {
-                CreateElasticClient(uris, indexName);
+                CreateElasticClient(uris);
             }
             
-            var elasticResponse = _elasticClient.Bulk(b => b.IndexMany(items, (d, doc) => d.Document(doc)));
+            var elasticResponse = _elasticClient.Bulk(b => b.Index(indexName).IndexMany(items));
+
             if (!elasticResponse.IsValid)
             {
                 throw new Exception($"Logging in Bulk to ElasticSearch failed. Response: {elasticResponse}");
